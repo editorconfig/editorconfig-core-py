@@ -24,4 +24,4 @@ To install the gedit 2 plugin, copy the `editorconfig.gedit-plugin` and
 `~/.gnome2/gedit/plugins/`.
 
 [EditorConfig]: http://editorconfig.github.com/
-[EditorConfig core]: https://editorconfig.github.com/editorconfig
+[EditorConfig core]: https://github.com/editorconfig/editorconfig
