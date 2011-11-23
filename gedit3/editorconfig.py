@@ -15,12 +15,16 @@ class EditorConfigPlugin(GObject.Object, Gedit.WindowActivatable):
         """Get EditorConfig properties for file and change settings"""
 
         tab = window.get_active_tab()
-        props = self.get_properties(tab.get_document())
+        document = tab.get_document()
+        view = tab.get_view()
+
+        props = self.get_properties(document)
         self.process_properties(props)
-        self.set_indentation(tab.get_view(),
+        self.set_indentation(view,
                              props.get('indent_style'),
                              props.get('indent_size'),
                              props.get('tab_width'))
+        self.set_end_of_line(document, props.get('end_of_line'))
 
     def get_properties(self, document):
         """Call EditorConfig core to and return properties dict for document"""
@@ -44,6 +48,15 @@ class EditorConfigPlugin(GObject.Object, Gedit.WindowActivatable):
                     properties[prop] = int(properties[prop])
                 except ValueError:
                     del properties[prop]
+
+    def set_end_of_line(self, document, end_of_line):
+        """Set line ending style based on given end_of_line property"""
+        if end_of_line == "lf":
+            document.set_property('newline-type', 0)
+        elif end_of_line == "cr":
+            document.set_property('newline-type', 1)
+        elif end_of_line == "crlf":
+            document.set_property('newline-type', 2)
 
     def set_indentation(self, view, indent_style, indent_size, tab_width):
         """Set indentation style for given view based on given properties"""
