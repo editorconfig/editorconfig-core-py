@@ -23,5 +23,5 @@ To install the gedit 2 plugin, copy the `editorconfig.gedit-plugin` and
 `editorconfig.py` files from the `gedit2` directory to
 `~/.gnome2/gedit/plugins/`.
 
-[EditorConfig]: http://editorconfig.github.com/
+[EditorConfig]: http://editorconfig.org
 [EditorConfig core]: https://github.com/editorconfig/editorconfig
