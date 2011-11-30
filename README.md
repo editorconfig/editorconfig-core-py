@@ -8,7 +8,9 @@ Download the [EditorConfig core][] and follow the instructions in the README
 and INSTALL files to install it.
 
 Once EditorConfig core is installed, the plugin compatible with your version of
-Gedit will need to be installed.
+Gedit will need to be installed.  After installing the plugin, it must be
+enabled in Gedit.  To enable the plugin navigate to
+*Edit* -> *Preferences* -> *Plugins* and check the EditorConfig plugin.
 
 ### Installing Plugin for Gedit 3
 
