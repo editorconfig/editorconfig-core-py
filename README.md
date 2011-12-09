@@ -25,5 +25,17 @@ To install the gedit 2 plugin, copy the `editorconfig.gedit-plugin` and
 `editorconfig.py` files from the `gedit2` directory to
 `~/.gnome2/gedit/plugins/`.
 
+## Supported properties
+
+The EditorConfig Gedit plugin supports the following EditorConfig [properties][]:
+
+* indent_style
+* indent_size
+* end_of_line
+* root (only used by EditorConfig core)
+
+With the Gedit plugin the `tab_width` property is ignored and tabs are always set to the width of `indent_size`.
+
 [EditorConfig]: http://editorconfig.org
 [EditorConfig core]: https://github.com/editorconfig/editorconfig
+[properties]: http://editorconfig.org/#supported-properties
