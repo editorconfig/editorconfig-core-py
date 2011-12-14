@@ -27,14 +27,18 @@ To install the gedit 2 plugin, copy the `editorconfig.gedit-plugin` and
 
 ## Supported properties
 
-The EditorConfig Gedit plugin supports the following EditorConfig [properties][]:
+The EditorConfig Gedit plugin fully supports the following EditorConfig [properties][]:
 
 * indent_style
-* indent_size
 * end_of_line
 * root (only used by EditorConfig core)
 
-With the Gedit plugin the `tab_width` property is ignored and tabs are always set to the width of `indent_size`.
+There is partial support for the following properties:
+
+* indent_size
+* tab_width
+
+With the Gedit plugin the `tab_width` cannot be set to a different value than `indent_size`.  When `indent_style` is "tab", tabs will be used for indentation and `tab_width` will be used for indentation size to maintain the correct width of tab characters.  When `indent_size` is set to "space", the `tab_width` property is ignored and tabs are always set to the width of `indent_size`.
 
 [EditorConfig]: http://editorconfig.org
 [EditorConfig core]: https://github.com/editorconfig/editorconfig
