@@ -7,3 +7,4 @@ Description=EditorConfig Gedit plugin
 Authors=Trey Hunner <treyhunner@gmail.com>
 Copyright=Copyright © 2011-2012 EditorConfig Team
 Website=http://editorconfig.org
+Version=0.1
