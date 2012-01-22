@@ -5,5 +5,5 @@ IAge=3
 Name=EditorConfig
 Description=EditorConfig Gedit plugin
 Authors=Trey Hunner <treyhunner@gmail.com>
-Copyright=Copyright © 2011 EditorConfig Team
-Website=http://editorconfig.github.com
+Copyright=Copyright © 2011-2012 EditorConfig Team
+Website=http://editorconfig.org
