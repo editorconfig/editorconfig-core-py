@@ -27,8 +27,6 @@ import gedit
 from subprocess import Popen, PIPE, STDOUT
 
 class EditorConfigPlugin(gedit.Plugin):
-    NUMERIC_PROPERTIES = ('indent_size', 'tab_width')
-
     def activate(self, window):
         handler_id = window.connect('active_tab_state_changed', self.set_config)
         window.set_data('EditorConfigPluginHandlerId', handler_id)
@@ -63,13 +61,22 @@ class EditorConfigPlugin(gedit.Plugin):
     def process_properties(self, properties):
         """Process property values and remove invalid properties"""
 
-        # Convert any numeric properties to numbers and remove invalid values
-        for prop in self.NUMERIC_PROPERTIES:
-            if prop in properties:
+        # Convert tab_width to a number
+        if 'tab_width' in properties:
+            try:
+                properties['tab_width'] = int(properties['tab_width'])
+            except ValueError:
+                del properties['tab_width']
+
+        # Convert indent_size to a number or set equal to tab_width
+        if 'indent_size' in properties:
+            if properties['indent_size'] == "tab" and 'tab_width' in properties:
+                properties['indent_size'] = properties['tab_width']
+            else:
                 try:
-                    properties[prop] = int(properties[prop])
+                    properties['indent_size'] = int(properties['indent_size'])
                 except ValueError:
-                    del properties[prop]
+                    del properties['indent_size']
 
     def set_end_of_line(self, document, end_of_line):
         """Set line ending style based on given end_of_line property"""
