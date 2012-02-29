@@ -47,7 +47,7 @@ class EditorConfigPlugin(gedit.Plugin):
         self.set_end_of_line(document, props.get('end_of_line'))
 
     def get_properties(self, document):
-        """Call EditorConfig core to and return properties dict for document"""
+        """Call EditorConfig core and return properties dict for document"""
 
         if document:
             file_uri = document.get_uri()
