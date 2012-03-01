@@ -1,6 +1,6 @@
 [Gedit Plugin]
 Loader=python
-Module=editorconfig
+Module=editorconfig_gedit2
 IAge=2
 Name=EditorConfig
 Description=EditorConfig Gedit plugin

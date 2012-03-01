@@ -1,15 +1,16 @@
 #!/bin/sh
 
 geditversion=$(gedit --version | sed -n 's/gedit.*\s\([0-9]\).*/\1/p')
+installfiles=editorconfig_shared.py
 
 if [ "$geditversion" -eq "3" ] ; then
     localinstalldir=~/.local/share/gedit/plugins
     rootinstalldir=/usr/lib/gedit/plugins
-    plugindir=gedit3
+    installfiles="$installfiles editorconfig_gedit3.py editorconfig.plugin"
 else
     localinstalldir=~/.gnome2/gedit/plugins
     rootinstalldir=/usr/lib/gedit-2/plugins
-    plugindir=gedit2
+    installfiles="$installfiles editorconfig_gedit2.py editorconfig.gedit-plugin"
 fi
 
 if [ "$(id -u)" -ne "0" ] ; then
@@ -18,7 +19,7 @@ else
     installdir=$rootinstalldir
 fi
 
-echo "Copying $plugdir/* to $installdir..."
+echo "Copying $installfiles to $installdir..."
 mkdir -p $installdir &&
-cp -f $plugindir/* $installdir &&
+cp -f $installfiles $installdir &&
 echo "Done."

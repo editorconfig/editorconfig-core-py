@@ -12,17 +12,19 @@ Gedit will need to be installed.  After installing the plugin, it must be
 enabled in Gedit.  To enable the plugin navigate to
 *Edit* -> *Preferences* -> *Plugins* and check the EditorConfig plugin.
 
-### Installing Plugin for Gedit 3
+The `install.sh` script should install the appropriate plugin for your Gedit version.  If this does not work, the instructions below can be used to install the plugin manually.
 
-To install the gedit 3 plugin, copy the `editorconfig.plugin` and
-`editorconfig.py` files from the `gedit3` directory to
+### Manually Installing Plugin for Gedit 3
+
+To install the gedit 3 plugin, copy the `editorconfig.plugin`,
+`editorconfig_gedit3.py` and `editorconfig_shared.py` files to
 `~/.local/share/gedit/plugins/`.
 
 
-### Installing Plugin for Gedit 2
+### Manually Installing Plugin for Gedit 2
 
-To install the gedit 2 plugin, copy the `editorconfig.gedit-plugin` and
-`editorconfig.py` files from the `gedit2` directory to
+To install the gedit 2 plugin, copy the `editorconfig.gedit-plugin`,
+`editorconfig_gedit2.py`, and `editorconfig_shared.py` files to
 `~/.gnome2/gedit/plugins/`.
 
 ## Supported properties
