@@ -16,15 +16,15 @@ The `install.sh` script should install the appropriate plugin for your Gedit ver
 
 ### Manually Installing Plugin for Gedit 3
 
-To install the gedit 3 plugin, copy the `editorconfig.plugin`,
-`editorconfig_gedit3.py` and `editorconfig_shared.py` files to
+To install the gedit 3 plugin, copy the `editorconfig.plugin` file,
+`editorconfig_gedit3.py` file, and `editorconfig_plugin` directory to
 `~/.local/share/gedit/plugins/`.
 
 
 ### Manually Installing Plugin for Gedit 2
 
-To install the gedit 2 plugin, copy the `editorconfig.gedit-plugin`,
-`editorconfig_gedit2.py`, and `editorconfig_shared.py` files to
+To install the gedit 2 plugin, copy the `editorconfig.gedit-plugin` file,
+`editorconfig_gedit2.py` file, and `editorconfig_plugin` directory to
 `~/.gnome2/gedit/plugins/`.
 
 ## Supported properties
