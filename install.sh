@@ -21,5 +21,5 @@ fi
 
 echo "Copying $installfiles to $installdir..."
 mkdir -p $installdir &&
-cp -rf $installfiles $installdir &&
+cp -rfL $installfiles $installdir &&
 echo "Done."

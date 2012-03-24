@@ -27,6 +27,7 @@ import gedit
 import gtk
 from subprocess import Popen, PIPE, STDOUT
 from shared import EditorConfigPluginMixin
+from editorconfig.handler import EditorConfigHandler
 
 class EditorConfigPlugin(gedit.Plugin, EditorConfigPluginMixin):
     def activate(self, window):
@@ -40,10 +41,8 @@ class EditorConfigPlugin(gedit.Plugin, EditorConfigPluginMixin):
         if document:
             file_uri = document.get_uri()
             if file_uri and file_uri.startswith("file:///"):
-                args = ['editorconfig', file_uri[7:]]
-                proc = Popen(args, stdout=PIPE, stderr=STDOUT)
-                lines = proc.communicate()[0].split('\n')
-                return dict([p.split('=', 1) for p in lines if p.count('=')])
+                handler = EditorConfigHandler(file_uri[7:], '.editorconfig')
+                return handler.get_configurations()
         return {}
 
     def deactivate(self, window):

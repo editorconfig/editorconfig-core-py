@@ -26,6 +26,7 @@
 from subprocess import Popen, PIPE, STDOUT
 from gi.repository import GObject, Gedit
 from shared import EditorConfigPluginMixin
+from editorconfig.handler import EditorConfigHandler
 
 class EditorConfigPlugin(GObject.Object, Gedit.WindowActivatable,
     EditorConfigPluginMixin):
@@ -43,10 +44,8 @@ class EditorConfigPlugin(GObject.Object, Gedit.WindowActivatable,
         if document:
             file_uri = document.get_uri_for_display()
             if file_uri:
-                args = ['editorconfig', file_uri]
-                proc = Popen(args, stdout=PIPE, stderr=STDOUT)
-                lines = proc.communicate()[0].split('\n')
-                return dict([p.split('=', 1) for p in lines if p.count('=')])
+                handler = EditorConfigHandler(file_uri, '.editorconfig')
+                return handler.get_configurations()
         return {}
 
     def do_deactivate(self):
