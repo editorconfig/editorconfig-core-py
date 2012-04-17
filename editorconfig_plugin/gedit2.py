@@ -25,9 +25,7 @@
 
 import gedit
 import gtk
-from subprocess import Popen, PIPE, STDOUT
 from shared import EditorConfigPluginMixin
-from editorconfig.handler import EditorConfigHandler
 
 class EditorConfigPlugin(gedit.Plugin, EditorConfigPluginMixin):
     def activate(self, window):
@@ -35,14 +33,13 @@ class EditorConfigPlugin(gedit.Plugin, EditorConfigPluginMixin):
         window.set_data('EditorConfigPluginHandlerId', handler_id)
         self.exec_path_buffer = gtk.TextBuffer()
 
-    def get_properties(self, document):
+    def get_document_properties(self, document):
         """Call EditorConfig core and return properties dict for document"""
 
         if document:
             file_uri = document.get_uri()
             if file_uri and file_uri.startswith("file:///"):
-                handler = EditorConfigHandler(file_uri[7:], '.editorconfig')
-                return handler.get_configurations()
+                return self.get_properties_from_filename(file_uri[7:])
         return {}
 
     def deactivate(self, window):

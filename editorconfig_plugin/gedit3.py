@@ -23,10 +23,8 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 
-from subprocess import Popen, PIPE, STDOUT
 from gi.repository import GObject, Gedit
 from shared import EditorConfigPluginMixin
-from editorconfig.handler import EditorConfigHandler
 
 class EditorConfigPlugin(GObject.Object, Gedit.WindowActivatable,
     EditorConfigPluginMixin):
@@ -38,14 +36,13 @@ class EditorConfigPlugin(GObject.Object, Gedit.WindowActivatable,
                 self.set_config)
         self.window.set_data('EditorConfigPluginHandlerId', handler_id)
 
-    def get_properties(self, document):
+    def get_document_properties(self, document):
         """Call EditorConfig core and return properties dict for document"""
 
         if document:
             file_uri = document.get_uri_for_display()
             if file_uri:
-                handler = EditorConfigHandler(file_uri, '.editorconfig')
-                return handler.get_configurations()
+                return self.get_properties_from_filename(file_uri[7:])
         return {}
 
     def do_deactivate(self):

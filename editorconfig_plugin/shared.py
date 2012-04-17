@@ -1,3 +1,7 @@
+import logging
+from editorconfig import get_properties, EditorConfigError
+
+
 class EditorConfigPluginMixin(object):
     def set_config(self, window):
         """Get EditorConfig properties for file and change settings"""
@@ -6,13 +10,21 @@ class EditorConfigPluginMixin(object):
         document = tab.get_document()
         view = tab.get_view()
 
-        props = self.get_properties(document)
+        props = self.get_document_properties(document)
         self.process_properties(props)
         self.set_indentation(view,
                              props.get('indent_style'),
                              props.get('indent_size'),
                              props.get('tab_width'))
         self.set_end_of_line(document, props.get('end_of_line'))
+
+    def get_properties_from_filename(self, filename):
+        """Retrieve dict of EditorConfig properties for the given filename"""
+        try:
+            return get_properties(filename)
+        except EditorConfigError as e:
+            logging.error("Error reading EditorConfig file", exc_info=True)
+            return {}
 
     def process_properties(self, properties):
         """Process property values and remove invalid properties"""
