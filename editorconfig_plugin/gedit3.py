@@ -40,7 +40,9 @@ class EditorConfigPlugin(GObject.Object, Gedit.WindowActivatable,
     def get_document_properties(self, document):
         """Call EditorConfig core and return properties dict for document"""
         if document:
-            file_uri = document.get_uri_for_display()
-            if file_uri:
-                return self.get_properties_from_filename(file_uri[7:])
+            location = document.get_location()
+            if location:
+                file_uri = location.get_uri()
+                if file_uri.startswith('file:///'):
+                    return self.get_properties_from_filename(file_uri[7:])
         return {}
