@@ -5,6 +5,7 @@ from editorconfig import get_properties, EditorConfigError
 class EditorConfigPluginMixin(object):
 
     HANDLER_NAME = 'EditorConfigPluginHandlerId'
+    WHITESPACE_HANDLER_NAME = 'EditorConfigPluginTrimWhitespace'
 
     def activate_plugin(self, window):
         handler_id = window.connect('active_tab_state_changed', self.set_config)
@@ -14,6 +15,11 @@ class EditorConfigPluginMixin(object):
         handler_id = window.get_data(self.HANDLER_NAME)
         window.disconnect(handler_id)
         window.set_data(self.HANDLER_NAME, None)
+        for document in window.get_documents():
+            handler_id = document.get_data(self.WHITESPACE_HANDLER_NAME)
+            if handler_id is not None:
+                document.disconnect(handler_id)
+                document.set_data(self.HANDLER_NAME, None)
 
     def set_config(self, window):
         """Get EditorConfig properties for file and change settings"""
@@ -29,6 +35,8 @@ class EditorConfigPluginMixin(object):
                              props.get('indent_size'),
                              props.get('tab_width'))
         self.set_end_of_line(document, props.get('end_of_line'))
+        self.set_trim_trailing_whitespace(document,
+                props.get('trim_trailing_whitespace'))
 
     def get_properties_from_filename(self, filename):
         """Retrieve dict of EditorConfig properties for the given filename"""
@@ -58,6 +66,11 @@ class EditorConfigPluginMixin(object):
                 except ValueError:
                     del properties['indent_size']
 
+        if properties.get('trim_trailing_whitespace') == 'true':
+            properties['trim_trailing_whitespace'] = True
+        else:
+            properties['trim_trailing_whitespace'] = False
+
     def set_end_of_line(self, document, end_of_line):
         """Set line ending style based on given end_of_line property"""
         if end_of_line == "lf":
@@ -78,3 +91,33 @@ class EditorConfigPluginMixin(object):
             view.set_insert_spaces_instead_of_tabs(False)
             if tab_width:
                 view.set_tab_width(tab_width)
+
+    def set_trim_trailing_whitespace(self, document, trim_trailing_whitespace):
+        """Create/delete file save handler for trimming trailing whitespace"""
+        def trim_whitespace_on_save(document, *args):
+            document.begin_user_action()
+            self.trim_trailing_whitespace(document)
+            document.end_user_action()
+        handler_id = document.get_data(self.WHITESPACE_HANDLER_NAME)
+        if trim_trailing_whitespace:
+            # If no handler when trim_trailing_whitespace is "true", create one
+            if handler_id is None:
+                handler_id = document.connect('save', trim_whitespace_on_save)
+                document.set_data(self.WHITESPACE_HANDLER_NAME, handler_id)
+        elif handler_id is not None:
+            # Disconnect handler when trim_trailing_whitespace is "false"
+            document.disconnect(handler_id)
+            document.set_data(self.WHITESPACE_HANDLER_NAME, None)
+
+    def trim_trailing_whitespace(self, document):
+        """Trim trailing whitespace from each line of document"""
+        for line in range(document.get_end_iter().get_line() + 1):
+            end_of_line = document.get_iter_at_line(line)
+            end_of_line.forward_to_line_end()
+            whitespace_start = end_of_line.copy()
+            while whitespace_start.backward_char():
+                if not whitespace_start.get_char() in ' \t':
+                    whitespace_start.forward_char()
+                    break
+            if not whitespace_start.equal(end_of_line):
+                document.delete(whitespace_start, end_of_line)
