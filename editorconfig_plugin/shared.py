@@ -3,6 +3,9 @@ from editorconfig import get_properties, EditorConfigError
 
 
 class EditorConfigPluginMixin(object):
+
+    HANDLER_NAME = 'EditorConfigPluginHandlerId'
+
     def set_config(self, window):
         """Get EditorConfig properties for file and change settings"""
 

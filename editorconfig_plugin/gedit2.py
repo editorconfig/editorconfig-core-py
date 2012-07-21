@@ -30,7 +30,7 @@ from shared import EditorConfigPluginMixin
 class EditorConfigPlugin(gedit.Plugin, EditorConfigPluginMixin):
     def activate(self, window):
         handler_id = window.connect('active_tab_state_changed', self.set_config)
-        window.set_data('EditorConfigPluginHandlerId', handler_id)
+        window.set_data(self.HANDLER_NAME, handler_id)
         self.exec_path_buffer = gtk.TextBuffer()
 
     def get_document_properties(self, document):
@@ -43,6 +43,6 @@ class EditorConfigPlugin(gedit.Plugin, EditorConfigPluginMixin):
         return {}
 
     def deactivate(self, window):
-        handler_id = window.get_data('EditorConfigPluginHandlerId')
+        handler_id = window.get_data(self.HANDLER_NAME)
         window.disconnect(handler_id)
-        window.set_data('EditorConfigPluginHandlerId', None)
+        window.set_data(self.HANDLER_NAME, None)
