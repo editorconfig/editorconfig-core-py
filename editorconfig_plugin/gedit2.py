@@ -28,21 +28,17 @@ import gtk
 from shared import EditorConfigPluginMixin
 
 class EditorConfigPlugin(gedit.Plugin, EditorConfigPluginMixin):
+
     def activate(self, window):
-        handler_id = window.connect('active_tab_state_changed', self.set_config)
-        window.set_data(self.HANDLER_NAME, handler_id)
-        self.exec_path_buffer = gtk.TextBuffer()
+        self.activate_plugin(window)
+
+    def deactivate(self, window):
+        self.deactivate_plugin(window)
 
     def get_document_properties(self, document):
         """Call EditorConfig core and return properties dict for document"""
-
         if document:
             file_uri = document.get_uri()
             if file_uri and file_uri.startswith("file:///"):
                 return self.get_properties_from_filename(file_uri[7:])
         return {}
-
-    def deactivate(self, window):
-        handler_id = window.get_data(self.HANDLER_NAME)
-        window.disconnect(handler_id)
-        window.set_data(self.HANDLER_NAME, None)

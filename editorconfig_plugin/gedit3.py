@@ -32,20 +32,15 @@ class EditorConfigPlugin(GObject.Object, Gedit.WindowActivatable,
     window = GObject.property(type=Gedit.Window)
 
     def do_activate(self):
-        handler_id = self.window.connect('active_tab_state_changed',
-                self.set_config)
-        self.window.set_data(self.HANDLER_NAME, handler_id)
+        self.activate_plugin(self.window)
+
+    def do_deactivate(self):
+        self.deactivate_plugin(self.window)
 
     def get_document_properties(self, document):
         """Call EditorConfig core and return properties dict for document"""
-
         if document:
             file_uri = document.get_uri_for_display()
             if file_uri:
                 return self.get_properties_from_filename(file_uri[7:])
         return {}
-
-    def do_deactivate(self):
-        handler_id = self.window.get_data(self.HANDLER_NAME)
-        self.window.disconnect(handler_id)
-        self.window.set_data(self.HANDLER_NAME, None)

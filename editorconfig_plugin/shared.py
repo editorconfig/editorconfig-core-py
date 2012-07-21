@@ -6,6 +6,15 @@ class EditorConfigPluginMixin(object):
 
     HANDLER_NAME = 'EditorConfigPluginHandlerId'
 
+    def activate_plugin(self, window):
+        handler_id = window.connect('active_tab_state_changed', self.set_config)
+        window.set_data(self.HANDLER_NAME, handler_id)
+
+    def deactivate_plugin(self, window):
+        handler_id = window.get_data(self.HANDLER_NAME)
+        window.disconnect(handler_id)
+        window.set_data(self.HANDLER_NAME, None)
+
     def set_config(self, window):
         """Get EditorConfig properties for file and change settings"""
 
