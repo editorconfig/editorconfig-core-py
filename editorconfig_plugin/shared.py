@@ -8,7 +8,8 @@ class EditorConfigPluginMixin(object):
     WHITESPACE_HANDLER_NAME = 'EditorConfigPluginTrimWhitespace'
 
     def activate_plugin(self, window):
-        handler_id = window.connect('active_tab_state_changed', self.set_config)
+        handler_id = window.connect('active_tab_state_changed',
+                self.set_config)
         window.set_data(self.HANDLER_NAME, handler_id)
 
     def deactivate_plugin(self, window):
@@ -42,7 +43,7 @@ class EditorConfigPluginMixin(object):
         """Retrieve dict of EditorConfig properties for the given filename"""
         try:
             return get_properties(filename)
-        except EditorConfigError as e:
+        except EditorConfigError:
             logging.error("Error reading EditorConfig file", exc_info=True)
             return {}
 
@@ -58,7 +59,8 @@ class EditorConfigPluginMixin(object):
 
         # Convert indent_size to a number or set equal to tab_width
         if 'indent_size' in properties:
-            if properties['indent_size'] == "tab" and 'tab_width' in properties:
+            if (properties['indent_size'] == "tab" and
+                'tab_width' in properties):
                 properties['indent_size'] = properties['tab_width']
             else:
                 try:
