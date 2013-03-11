@@ -6,7 +6,7 @@ EditorConfig Python Core
    :target: http://travis-ci.org/editorconfig/editorconfig-core-py
 
 EditorConfig Python Core provides the same functionality as the
-`EditorConfig C Core <https://github.com/editorconfig/editorconfig-core>`_. 
+`EditorConfig C Core <https://github.com/editorconfig/editorconfig-core>`_.
 EditorConfig Python core can be used as a command line program or as an
 importable library.
 
@@ -23,9 +23,11 @@ information on the file format and supported text editors, see the
 Installation
 ============
 
-With setuptools::
+With setuptools:
 
-    sudo python setup.py install
+.. code-block:: bash
+
+    $ sudo python setup.py install
 
 Getting Help
 ============
@@ -40,7 +42,9 @@ may want to import and use the EditorConfig Python Core directly.
 Using as a Library
 ==================
 
-Basic example use of EditorConfig Python Core as a library::
+Basic example use of EditorConfig Python Core as a library:
+
+.. code-block:: python
 
     from editorconfig import get_properties, EditorConfigError
 
@@ -61,10 +65,12 @@ Running Test Cases
 ==================
 
 `Cmake <http://www.cmake.org>`_ has to be installed first. Run the test cases
-using the following commands::
+using the following commands:
 
-    cmake .
-    ctest .
+.. code-block:: bash
+
+    $ cmake .
+    $ ctest .
 
 License
 =======
