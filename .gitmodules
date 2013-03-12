@@ -1,3 +1,0 @@
-[submodule "editorconfig-core-py"]
-	path = editorconfig-core-py
-	url = git://github.com/editorconfig/editorconfig-core-py.git
