@@ -4,8 +4,12 @@ This is an [EditorConfig][] plugin for [gedit][].
 
 ## Downloading Gedit Plugin
 
-The EditorConfig Gedit plugin can be downloaded as an archive file from the
-[downloads][] page or via Git as follows:
+[Click here to download the latest version][latest]
+
+Older versions of the EditorConfig Gedit plugin can be downloaded as an archive
+file from the [tags][] page.
+
+The plugin can also be downloaded using via Git as follows:
 
     git clone git://github.com/editorconfig/editorconfig-gedit.git
     git submodule update --init
@@ -55,4 +59,5 @@ property is ignored and tabs are always set to the width of `indent_size`.
 [EditorConfig]: http://editorconfig.org
 [gedit]: http://projects.gnome.org/gedit
 [properties]: http://editorconfig.org/#supported-properties
-[downloads]: https://github.com/editorconfig/editorconfig-gedit/downloads
+[tags]: https://github.com/editorconfig/editorconfig-gedit/tags
+[latest]: https://github.com/editorconfig/editorconfig-gedit/archive/v0.5.1.tar.gz
