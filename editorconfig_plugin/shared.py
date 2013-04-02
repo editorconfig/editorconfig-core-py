@@ -1,4 +1,11 @@
+from os.path import abspath
+import sys
 import logging
+
+editorconfig_path = abspath('../editorconfig-core-py/')
+if editorconfig_path not in sys.path:
+    sys.path.append(editorconfig_path)
+
 from editorconfig import get_properties, EditorConfigError
 
 
