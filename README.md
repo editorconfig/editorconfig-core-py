@@ -16,7 +16,10 @@ The plugin can also be downloaded using via Git as follows:
 
 ## Installation
 
-Install the plugin compatible with your version of Gedit by executing the
+First, make sure the core EditorConfig Python library is installed on your
+machine.
+
+Next, install the plugin compatible with your version of Gedit by executing the
 `install.sh` script.  The `install.sh` script should install the appropriate
 plugin for your Gedit version.  If this does not work, the instructions below
 can be used to install the plugin manually.
