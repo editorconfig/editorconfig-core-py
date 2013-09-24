@@ -1,9 +1,10 @@
 #!/bin/sh
 
-geditversion=$(gedit --version | sed -n 's/gedit.*\s\([0-9]\).*/\1/p')
+majorversion=$(gedit --version | sed -n 's/gedit.*\s\([0-9]\).*/\1/p')
+minorversion=$(gedit --version | sed -n 's/gedit.*\s[0-9]\.\([0-9]*\).*/\1/p')
 installfiles="editorconfig_plugin/"
 
-if [ "$geditversion" -eq "3" ] ; then
+if [ "$majorversion" -eq "3" ] ; then
     localinstalldir=~/.local/share/gedit/plugins
     rootinstalldir=/usr/lib/gedit/plugins
     installfiles="$installfiles editorconfig_gedit3.py editorconfig.plugin"
@@ -23,3 +24,9 @@ echo "Copying $installfiles to $installdir..."
 mkdir -p $installdir &&
 cp -rfL $installfiles $installdir &&
 echo "Done."
+
+if [ "$majorversion" -eq "3" -a "$minorversion" -ge "8" ] ; then
+    echo "Patching $installdir/editorconfig.plugin for Python 3 support..."
+    sed -i 's/python/python3/' "$installdir/editorconfig.plugin" &&
+    echo "Done."
+fi
