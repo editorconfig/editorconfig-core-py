@@ -24,7 +24,7 @@
 #
 
 import gedit
-from shared import EditorConfigPluginMixin
+from .shared import EditorConfigPluginMixin
 
 
 class EditorConfigPlugin(gedit.Plugin, EditorConfigPluginMixin):

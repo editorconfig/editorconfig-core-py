@@ -24,7 +24,7 @@
 #
 
 from gi.repository import GObject, Gedit
-from shared import EditorConfigPluginMixin
+from .shared import EditorConfigPluginMixin
 
 
 class EditorConfigPlugin(GObject.Object, Gedit.WindowActivatable,
