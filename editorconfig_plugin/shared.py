@@ -102,16 +102,15 @@ class EditorConfigPluginMixin(object):
             document.begin_user_action()
             self.trim_trailing_whitespace(document)
             document.end_user_action()
-        if getattr(document, 'editorconfig_whitespace_handler', None):
-            # The trimmer exists, so remove it if necessary:
-            if not trim_trailing_whitespace:
-                document.disconnect(document.editorconfig_whitespace_handler)
-                document.editorconfig_whitespace_handler = None
-        else:
-            # The trimmer does not exist, so install it if necessary:
-            if trim_trailing_whitespace:
-                handler_id = document.connect('save', trim_whitespace_on_save)
-                document.editorconfig_whitespace_handler = handler_id
+        handler_id = getattr(document, 'editorconfig_whitespace_handler', None)
+        if trim_trailing_whitespace and not handler_id:
+            # The trimmer does not exist, so install it:
+            handler_id = document.connect('save', trim_whitespace_on_save)
+            document.editorconfig_whitespace_handler = handler_id
+        elif not trim_trailing_whitespace and handler_id:
+            # The trimmer exists, so remove it:
+            document.disconnect(document.editorconfig_whitespace_handler)
+            document.editorconfig_whitespace_handler = None
 
     def trim_trailing_whitespace(self, document):
         """Trim trailing whitespace from each line of document"""
