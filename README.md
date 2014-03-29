@@ -4,7 +4,7 @@ This is an [EditorConfig][] plugin for [gedit][].
 
 ## Downloading Gedit Plugin
 
-[Click here to download the latest version][latest]
+[Click here to download the latest version](https://github.com/editorconfig/editorconfig-gedit/archive/v0.5.3.zip)
 
 Older versions of the EditorConfig Gedit plugin can be downloaded as an archive
 file from the [tags][] page.
