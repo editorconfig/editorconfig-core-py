@@ -2,7 +2,7 @@
 EditorConfig Python Core
 ========================
 
-.. image:: https://secure.travis-ci.org/editorconfig/editorconfig-core-py.png?branch=master
+.. image:: https://secure.travis-ci.org/editorconfig/editorconfig-core-py.svg?branch=master
    :target: http://travis-ci.org/editorconfig/editorconfig-core-py
 
 EditorConfig Python Core provides the same functionality as the
