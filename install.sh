@@ -3,15 +3,16 @@
 majorversion=$(gedit --version | sed -n 's/gedit.*\s\([0-9]\).*/\1/p')
 minorversion=$(gedit --version | sed -n 's/gedit.*\s[0-9]\.\([0-9]*\).*/\1/p')
 installfiles="editorconfig_plugin/"
+editorconfigcore="editorconfig-core-py/"
 
 if [ "$majorversion" -eq "3" ] ; then
     localinstalldir=~/.local/share/gedit/plugins
     rootinstalldir=/usr/lib/gedit/plugins
-    installfiles="$installfiles editorconfig_gedit3.py editorconfig.plugin"
+    installfiles="$installfiles $editorconfigcore editorconfig_gedit3.py editorconfig.plugin"
 else
     localinstalldir=~/.gnome2/gedit/plugins
     rootinstalldir=/usr/lib/gedit-2/plugins
-    installfiles="$installfiles editorconfig_gedit2.py editorconfig.gedit-plugin"
+    installfiles="$installfiles $editorconfigcore editorconfig_gedit2.py editorconfig.gedit-plugin"
 fi
 
 if [ "$(id -u)" -ne "0" ] ; then
