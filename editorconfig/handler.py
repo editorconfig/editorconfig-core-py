@@ -7,11 +7,14 @@ Licensed under PSF License (see LICENSE.txt file).
 
 """
 
+from __future__ import print_function
+from __future__ import absolute_import
+from __future__ import unicode_literals
 import os
 
-from editorconfig import VERSION
-from editorconfig.ini import EditorConfigParser
-from editorconfig.exceptions import PathError, VersionError
+from . import VERSION
+from .ini import EditorConfigParser
+from .exceptions import PathError, VersionError
 
 
 __all__ = ['EditorConfigHandler']

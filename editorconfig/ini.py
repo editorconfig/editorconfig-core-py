@@ -13,16 +13,19 @@ Changes to original ConfigParser:
 
 """
 
+from __future__ import print_function
+from __future__ import absolute_import
+from __future__ import unicode_literals
 import re
 from codecs import open
 import posixpath
 from os import sep
 from os.path import normpath, dirname
 
-from editorconfig.exceptions import ParsingError
-from editorconfig.fnmatch import fnmatch
-from editorconfig.odict import OrderedDict
-from editorconfig.compat import u
+from .exceptions import ParsingError
+from .fnmatch import fnmatch
+from .odict import OrderedDict
+from .compat import u
 
 
 __all__ = ["ParsingError", "EditorConfigParser"]

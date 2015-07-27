@@ -10,11 +10,11 @@ from __future__ import unicode_literals
 import getopt
 import sys
 
-from editorconfig import __version__, VERSION
-from editorconfig.compat import force_unicode
-from editorconfig.versiontools import split_version
-from editorconfig.handler import EditorConfigHandler
-from editorconfig.exceptions import ParsingError, PathError, VersionError
+from . import __version__, VERSION
+from .compat import force_unicode
+from .versiontools import split_version
+from .handler import EditorConfigHandler
+from .exceptions import ParsingError, PathError, VersionError
 
 
 def version():
