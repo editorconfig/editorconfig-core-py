@@ -25,7 +25,6 @@ from os.path import normpath, dirname
 from .exceptions import ParsingError
 from .fnmatch import fnmatch
 from .odict import OrderedDict
-from .compat import u
 
 
 __all__ = ["ParsingError", "EditorConfigParser"]
@@ -125,7 +124,7 @@ class EditorConfigParser(object):
             line = fp.readline()
             if not line:
                 break
-            if lineno == 0 and line.startswith(u('\ufeff')):
+            if lineno == 0 and line.startswith('\ufeff'):
                 line = line[1:]  # Strip UTF-8 BOM
             lineno = lineno + 1
             # comment or blank line?
