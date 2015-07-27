@@ -4,6 +4,9 @@ Licensed under PSF License (see LICENSE.txt file).
 
 """
 
+from __future__ import print_function
+from __future__ import absolute_import
+from __future__ import unicode_literals
 import getopt
 import sys
 
@@ -15,21 +18,18 @@ from editorconfig.exceptions import ParsingError, PathError, VersionError
 
 
 def version():
-    print("EditorConfig Python Core Version %s" % __version__)
+    print("EditorConfig Python Core Version {}".format(__version__))
 
 
 def usage(command, error=False):
-    if error:
-        out = sys.stderr
-    else:
-        out = sys.stdout
-    out.write("%s [OPTIONS] FILENAME\n" % command)
-    out.write('-f                 '
-              'Specify conf filename other than ".editorconfig".\n')
-    out.write("-b                 "
-              "Specify version (used by devs to test compatibility).\n")
-    out.write("-h OR --help       Print this help message.\n")
-    out.write("-v OR --version    Display version information.\n")
+    out = sys.stderr if error else sys.stdout
+    print("{} [OPTIONS] FILENAME\n".format(command), file=out)
+    print("-f                 "
+          'Specify conf filename other than ".editorconfig".\n', file=out)
+    print("-b                 "
+          "Specify version (used by devs to test compatibility).\n", file=out)
+    print("-h OR --help       Print this help message.\n", file=out)
+    print("-v OR --version    Display version information.\n", file=out)
 
 
 def main():
@@ -57,9 +57,9 @@ def main():
         if option == '-b':
             version_tuple = split_version(arg)
             if version_tuple is None:
-                sys.exit("Invalid version number: %s" % arg)
+                sys.exit("Invalid version number: {}".format(arg))
 
-    if len(args) < 1:
+    if not args:
         usage(command_name, error=True)
         sys.exit(2)
     filenames = args
@@ -69,10 +69,10 @@ def main():
         handler = EditorConfigHandler(filename, conf_filename, version_tuple)
         try:
             options = handler.get_configurations()
-        except (ParsingError, PathError, VersionError):
+        except (ParsingError, PathError, VersionError) as e:
             print(str(e))
             sys.exit(2)
         if multiple_files:
-            print("[%s]" % filename)
+            print("[{}]".format(filename))
         for key, value in options.items():
-            print("%s=%s" % (key, value))
+            print("{}={}".format(key, value))
