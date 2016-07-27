@@ -16,7 +16,7 @@ The plugin can also be downloaded using via Git as follows:
 
 ## Installation
 
-First, make sure the core EditorConfig Python library is installed on your
+First, make sure the core [EditorConfig Python Core library][] is installed on your
 machine.
 
 Next, install the plugin compatible with your version of Gedit by executing the
@@ -60,6 +60,7 @@ of tab characters.  When `indent_style` is set to "space", the `tab_width`
 property is ignored and tabs are always set to the width of `indent_size`.
 
 [EditorConfig]: http://editorconfig.org
+[EditorConfig Python Core library]: https://github.com/editorconfig/editorconfig-core-py
 [gedit]: http://projects.gnome.org/gedit
 [properties]: http://editorconfig.org/#supported-properties
 [tags]: https://github.com/editorconfig/editorconfig-gedit/tags
