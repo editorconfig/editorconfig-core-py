@@ -8,12 +8,15 @@ python:
   - "3.4"
   - "pypy"
 
-install:
-  - sudo apt-get install cmake
-
 # test script
 script:
   - ctest -VV --output-on-failure .
+
+addons:
+ apt:
+   packages:
+   - cmake
+
 
 # Notify the mailing list
 notifications:
