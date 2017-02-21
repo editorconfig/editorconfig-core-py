@@ -1,5 +1,5 @@
 [Plugin]
-Loader=python
+Loader=python3
 Module=editorconfig_gedit3
 IAge=3
 Name=EditorConfig

@@ -37,6 +37,9 @@ To install the gedit 2 plugin manually, execute the following copy command:
 
     cp -Lr editorconfig.gedit-plugin editorconfig_gedit2.py editorconfig_plugin ~/.gnome2/gedit/plugins/
 
+You might need to change "python3" in the file editorconfig.plugin to "python"
+if gedit complains the loader.
+
 ## Supported properties
 
 The EditorConfig Gedit plugin fully supports the following EditorConfig
