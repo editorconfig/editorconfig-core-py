@@ -12,7 +12,6 @@ file from the [tags][] page.
 The plugin can also be downloaded using via Git as follows:
 
     git clone git://github.com/editorconfig/editorconfig-gedit.git
-    git submodule update --init
 
 ## Installation
 
