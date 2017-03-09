@@ -1,12 +1,20 @@
 ========================
 EditorConfig Python Core
 ========================
+.. image:: https://img.shields.io/pypi/v/EditorConfig.svg
+    :target: https://pypi.python.org/pypi/EditorConfig
+
+.. image:: https://img.shields.io/pypi/wheel/EditorConfig.svg
+    :target: https://pypi.python.org/pypi/EditorConfig
+
+.. image:: https://img.shields.io/pypi/pyversions/EditorConfig.svg
+    :target: https://pypi.python.org/pypi/EditorConfig
 
 .. image:: https://secure.travis-ci.org/editorconfig/editorconfig-core-py.svg?branch=master
    :target: http://travis-ci.org/editorconfig/editorconfig-core-py
 
 EditorConfig Python Core provides the same functionality as the
-`EditorConfig C Core <https://github.com/editorconfig/editorconfig-core>`_. 
+`EditorConfig C Core <https://github.com/editorconfig/editorconfig-core>`_.
 EditorConfig Python core can be used as a command line program or as an
 importable library.
 
