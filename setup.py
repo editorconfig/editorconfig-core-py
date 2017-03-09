@@ -7,7 +7,7 @@ setup(
     author='EditorConfig Team',
     packages=['editorconfig'],
     url='http://editorconfig.org/',
-    license='LICENSE.txt',
+    license='python',
     description='EditorConfig File Locator and Interpreter for Python',
     long_description=open('README.rst').read(),
     entry_points = {
@@ -16,6 +16,7 @@ setup(
         ]
     },
     classifiers=[
+        'License :: OSI Approved :: Python Software Foundation License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.6',
