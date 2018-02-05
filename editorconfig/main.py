@@ -7,11 +7,11 @@ Licensed under PSF License (see LICENSE.txt file).
 import getopt
 import sys
 
-from editorconfig import __version__, VERSION
+from editorconfig import VERSION, __version__
 from editorconfig.compat import force_unicode
-from editorconfig.versiontools import split_version
-from editorconfig.handler import EditorConfigHandler
 from editorconfig.exceptions import ParsingError, PathError, VersionError
+from editorconfig.handler import EditorConfigHandler
+from editorconfig.versiontools import split_version
 
 
 def version():

@@ -10,8 +10,8 @@ Licensed under PSF License (see LICENSE.txt file).
 import os
 
 from editorconfig import VERSION
-from editorconfig.ini import EditorConfigParser
 from editorconfig.exceptions import PathError, VersionError
+from editorconfig.ini import EditorConfigParser
 
 
 __all__ = ['EditorConfigHandler']
