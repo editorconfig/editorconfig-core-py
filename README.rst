@@ -85,6 +85,4 @@ Python (e.g. Python 3)::
 License
 =======
 
-Unless otherwise stated, all files are distributed under the PSF license.  The
-odict library (editorconfig/odict.py) is distributed under the New BSD license.
-See LICENSE.txt file for details on PSF license.
+See COPYING file for licensing details.

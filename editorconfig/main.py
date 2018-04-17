@@ -1,6 +1,6 @@
 """EditorConfig command line interface
 
-Licensed under PSF License (see LICENSE.txt file).
+Licensed under Simplified BSD License (see LICENSE.BSD file).
 
 """
 

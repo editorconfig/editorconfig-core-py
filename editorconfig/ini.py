@@ -2,7 +2,7 @@
 
 Based on code from ConfigParser.py file distributed with Python 2.6.
 
-Licensed under PSF License (see LICENSE.txt file).
+Licensed under PSF License (see LICENSE.PSF file).
 
 Changes to original ConfigParser:
 
