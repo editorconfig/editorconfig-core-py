@@ -178,7 +178,7 @@ def translate(pat, nested=False):
                 num_range = NUMERIC_RANGE.match(pat[index:pos])
                 if num_range:
                     numeric_groups.append(map(int, num_range.groups()))
-                    result += "([+-]?\d+)"
+                    result += r"([+-]?\d+)"
                 else:
                     inner_result, inner_groups = translate(pat[index:pos],
                                                            nested=True)
@@ -216,5 +216,5 @@ def translate(pat, nested=False):
         else:
             is_escaped = False
     if not nested:
-        result += '\Z(?ms)'
+        result = r'(?s)%s\Z' % result
     return result, numeric_groups
