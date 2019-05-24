@@ -358,6 +358,17 @@ def num_re(a_width, min, max, suffix):
 
     re = ""
 
+    # Short cut for justified 0-99*
+    if min == 0 and width >= digits(max) and digits(max) < digits(max+1):
+        while width > digits(max):
+            re += '0'
+            width -= 1
+        for i in range(width):
+            re += "[0-9]"
+
+        return re
+
+
     # if min is not divisible by 10, create re to match the gap to the next
     # number divisable by 10
     if min == 0 or min%10 != 0:
