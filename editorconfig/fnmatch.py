@@ -143,7 +143,7 @@ def doTranslate(pat, state):
             else:
                 regex += '[^/]*'
         elif current_char == '?':
-            regex += '.'
+            regex += '[^/]'
         elif current_char == '[':
             pos = getClosingBracketIndex(pat, index, state)
             if pos < 0:   # either unclosed or contains slash

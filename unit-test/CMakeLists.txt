@@ -29,6 +29,13 @@ glob_test("a b.c" "^a\\\\ b\\\\.c$")
 glob_test("test/**/b.c" "^test(?:/|/.*/)b\\\\.c$")
 glob_test("test/*/b.c" "^test/[^/]*/b\\\\.c$")
 glob_test("**/b.c" "^.*/b\\\\.c$")
+glob_test("ab?.c" "^ab[^/]\\\\.c$")
+
+# escaped special chars
+glob_test("a\\\\*.c" "^a\\\\*\\\\.c$")
+glob_test("a\\\\?.c" "^a\\\\?\\\\.c$")
+glob_test("a\\\\{.c" "^a\\\\{\\\\.c$")
+glob_test("a\\\\[.c" "^a\\\\[\\\\.c$")
 
 # brackets
 glob_test("[abc]" "^[abc]$")
