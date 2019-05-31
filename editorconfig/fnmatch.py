@@ -418,7 +418,7 @@ def num_re(a_width, min, max, suffix):
     elif new_min%10 != 9:
         if re != "":
             re += "|"
-        re += "%d" % max
+        re += "%0*d" % (width, max)
     # else: The number ended with '9'/'99'/'999'... and was handled in the loop above
 
     return re
