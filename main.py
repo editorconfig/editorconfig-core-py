@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 
-from editorconfig.main import main
+from editorconfig.__main__ import main
 
 
 if __name__ == "__main__":
