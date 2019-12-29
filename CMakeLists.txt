@@ -17,5 +17,5 @@ if(NOT PYTHONINTERP_FOUND)
 endif()
 
 enable_testing()
-set(EDITORCONFIG_CMD ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/main.py)
+set(EDITORCONFIG_CMD ${PYTHON_EXECUTABLE} -m editorconfig)
 add_subdirectory(tests)

@@ -13,6 +13,7 @@ python:
 before_script:
   - cmake .
 script:
+  - export PYTHONPATH=$(pwd)
   - ctest -VV --output-on-failure .
 
 addons:

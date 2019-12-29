@@ -76,3 +76,7 @@ def main():
             print("[%s]" % filename)
         for key, value in options.items():
             print("%s=%s" % (key, value))
+
+
+if __name__ == "__main__":
+    main()
