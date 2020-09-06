@@ -7,7 +7,6 @@ __version__ strings to VERSION tuples and vice versa.
 
 import re
 
-
 __all__ = ['join_version', 'split_version']
 
 
