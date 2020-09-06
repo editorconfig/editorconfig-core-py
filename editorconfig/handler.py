@@ -3,18 +3,17 @@
 Provides ``EditorConfigHandler`` class for locating and parsing
 EditorConfig files relevant to a given filepath.
 
-Licensed under PSF License (see LICENSE.txt file).
+Licensed under Simplified BSD License (see LICENSE.BSD file).
 
 """
 
-from __future__ import print_function
-from __future__ import absolute_import
-from __future__ import unicode_literals
+from __future__ import print_function, absolute_import, unicode_literals
+
 import os
 
 from . import VERSION
-from .ini import EditorConfigParser
 from .exceptions import PathError, VersionError
+from .ini import EditorConfigParser
 
 
 __all__ = ['EditorConfigHandler']

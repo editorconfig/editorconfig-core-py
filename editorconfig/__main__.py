@@ -1,20 +1,18 @@
 """EditorConfig command line interface
 
-Licensed under PSF License (see LICENSE.txt file).
+Licensed under Simplified BSD License (see LICENSE.BSD file).
 
 """
 
-from __future__ import print_function
-from __future__ import absolute_import
-from __future__ import unicode_literals
+from __future__ import print_function, absolute_import, unicode_literals
 import getopt
 import sys
 
-from . import __version__, VERSION
+from . import VERSION, __version__
 from .compat import force_unicode
-from .versiontools import split_version
-from .handler import EditorConfigHandler
 from .exceptions import ParsingError, PathError, VersionError
+from .handler import EditorConfigHandler
+from .versiontools import split_version
 
 
 def version():
@@ -75,4 +73,14 @@ def main():
         if multiple_files:
             print("[{}]".format(filename))
         for key, value in options.items():
+<<<<<<< HEAD:editorconfig/main.py
             print("{}={}".format(key, value))
+||||||| 490fa7e:editorconfig/main.py
+            print("%s=%s" % (key, value))
+=======
+            print("%s=%s" % (key, value))
+
+
+if __name__ == "__main__":
+    main()
+>>>>>>> origin/master:editorconfig/__main__.py

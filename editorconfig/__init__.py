@@ -1,8 +1,7 @@
 """EditorConfig Python Core"""
 
 from editorconfig.versiontools import join_version
-
-VERSION = (0, 12, 0, "final")
+from editorconfig.version import VERSION
 
 __all__ = ['get_properties', 'EditorConfigError', 'exceptions']
 
