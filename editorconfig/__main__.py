@@ -74,14 +74,8 @@ def main():
         if multiple_files:
             print("[{}]".format(filename))
         for key, value in options.items():
-<<<<<<< HEAD:editorconfig/main.py
             print("{}={}".format(key, value))
-||||||| 490fa7e:editorconfig/main.py
-            print("%s=%s" % (key, value))
-=======
-            print("%s=%s" % (key, value))
 
 
 if __name__ == "__main__":
     main()
->>>>>>> origin/master:editorconfig/__main__.py
