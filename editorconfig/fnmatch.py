@@ -28,7 +28,7 @@ _cache = {}
 LEFT_BRACE = re.compile(
     r"""
 
-    (?: ^ | [^\\] )     # Beginning of string or a character besides "\"
+    (?<! \\ )           # Not preceded by "\"
 
     \{                  # "{"
 
@@ -38,7 +38,7 @@ LEFT_BRACE = re.compile(
 RIGHT_BRACE = re.compile(
     r"""
 
-    (?: ^ | [^\\] )     # Beginning of string or a character besides "\"
+    (?<! \\ )           # Not preceded by "\"
 
     \}                  # "}"
 
