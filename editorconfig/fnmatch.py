@@ -135,7 +135,7 @@ def translate(pat, nested=False):
             else:
                 result += '[^/]*'
         elif current_char == '?':
-            result += '.'
+            result += '[^/]'
         elif current_char == '[':
             if in_brackets:
                 result += '\\['
@@ -148,8 +148,8 @@ def translate(pat, nested=False):
                         break
                     pos += 1
                 if has_slash:
-                    result += '\\[' + pat[index:(pos + 1)] + '\\]'
-                    index = pos + 2
+                    result += '\\[' + pat[index:(pos + 1)]
+                    index = pos + 1
                 else:
                     if index < length and pat[index] in '!^':
                         index += 1
@@ -163,8 +163,11 @@ def translate(pat, nested=False):
             else:
                 result += '\\' + current_char
         elif current_char == ']':
-            result += current_char
-            in_brackets = False
+            if in_brackets and pat[index-2] == '\\':
+                result += '\\]'
+            else:
+                result += current_char
+                in_brackets = False
         elif current_char == '{':
             pos = index
             has_comma = False
