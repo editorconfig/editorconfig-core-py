@@ -73,6 +73,7 @@ Running Test Cases
 `Cmake <http://www.cmake.org>`_ has to be installed first. Run the test cases
 using the following commands::
 
+    export PYTHONPATH=$(pwd)
     cmake .
     ctest .
 
