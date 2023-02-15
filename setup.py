@@ -16,6 +16,10 @@ setup(
     author='EditorConfig Team',
     packages=['editorconfig'],
     url='http://editorconfig.org/',
+    project_urls = {
+        "Source Code": "https://github.com/editorconfig/editorconfig-core-py",
+        "Bug Tracker": "https://github.com/editorconfig/editorconfig-core-py/issues",
+    },
     license='python',
     description='EditorConfig File Locator and Interpreter for Python',
     long_description=open('README.rst').read(),
