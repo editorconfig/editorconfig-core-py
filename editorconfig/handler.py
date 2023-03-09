@@ -7,10 +7,12 @@ Licensed under Simplified BSD License (see LICENSE.BSD file).
 
 """
 
+import collections
 import os
+import re
 
 from editorconfig import VERSION
-from editorconfig.exceptions import PathError, VersionError
+from editorconfig.exceptions import PathError, VersionError, InvalidValue
 from editorconfig.ini import EditorConfigParser
 
 
@@ -27,6 +29,34 @@ def get_filenames(path, filename):
             break
         path = newpath
     return path_list
+
+
+def check_options(path: str, options: collections.OrderedDict) -> None:
+    if options.get("indent_style") not in (None, "tab", "space"):
+        raise InvalidValue(path, f'ident_style must be "tab" or "space", not "{options["indent_style"]}"', "indent_style", options["indent_style"])
+
+    if "indent_size" in options:
+        if re.match("^\d+$", options["indent_size"]) is None:
+            raise InvalidValue(path, f'ident_size must be a whole number, not "{options["indent_size"]}"', "indent_size", options["indent_size"])
+
+    if "tab_width" in options:
+        if re.match("^\d+$", options["tab_width"]) is None:
+            raise InvalidValue(path, f'tab_width must be a whole number, not "{options["tab_width"]}"', "tab_width", options["tab_width"])
+
+    if options.get("end_of_line") not in (None, "lf", "cr", "crlf"):
+        raise InvalidValue(path, f'end_of_line must be "lf", "cr", or "crlf" , not "{options["end_of_line"]}"', "end_of_line", options["end_of_line"])
+
+    if options.get("charset") not in (None, "latin1", "utf-8", "utf-8-bom", "utf-16be", "utf-16le"):
+        raise InvalidValue(path, f'charset must be "latin1", "utf-8", "utf-8-bom", "utf-16be" or "utf-16le", not "{options["charset"]}"', "charset", options["charset"])
+
+    if options.get("indent_style") not in (None, "tab", "space"):
+        raise InvalidValue(path, f'ident_style must be "tab" or "space", not "{options["indent_style"]}"', "indent_style", options["indent_style"])
+
+    if options.get("trim_trailing_whitespace") not in (None, "true", "false"):
+        raise InvalidValue(path, f'trim_trailing_whitespace be "true" or "false", not "{options["trim_trailing_whitespace"]}"', "trim_trailing_whitespace", options["trim_trailing_whitespace"])
+
+    if options.get("insert_final_newline") not in (None, "true", "false"):
+        raise InvalidValue(path, f'insert_final_newline be "true" or "false", not "{options["insert_final_newline"]}"', "insert_final_newline", options["insert_final_newline"])
 
 
 class EditorConfigHandler(object):
@@ -76,11 +106,13 @@ class EditorConfigHandler(object):
             if old_options:
                 self.options.update(old_options)
 
+            self.preprocess_values()
+            check_options(filename, self.options)
+
             # Stop parsing if parsed file has a ``root = true`` option
             if parser.root_file:
                 break
 
-        self.preprocess_values()
         return self.options
 
     def check_assertions(self):
