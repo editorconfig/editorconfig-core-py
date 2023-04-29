@@ -4,32 +4,31 @@ Licensed under Simplified BSD License (see LICENSE.BSD file).
 
 """
 
+from __future__ import absolute_import, print_function, unicode_literals
+
 import getopt
 import sys
 
-from editorconfig import VERSION, __version__
-from editorconfig.compat import force_unicode
-from editorconfig.exceptions import ParsingError, PathError, VersionError
-from editorconfig.handler import EditorConfigHandler
-from editorconfig.versiontools import split_version
+from . import VERSION, __version__
+from .compat import force_unicode
+from .exceptions import ParsingError, PathError, VersionError
+from .handler import EditorConfigHandler
+from .versiontools import split_version
 
 
 def version():
-    print("EditorConfig Python Core Version %s" % __version__)
+    print("EditorConfig Python Core Version {}".format(__version__))
 
 
 def usage(command, error=False):
-    if error:
-        out = sys.stderr
-    else:
-        out = sys.stdout
-    out.write("%s [OPTIONS] FILENAME\n" % command)
-    out.write('-f                 '
-              'Specify conf filename other than ".editorconfig".\n')
-    out.write("-b                 "
-              "Specify version (used by devs to test compatibility).\n")
-    out.write("-h OR --help       Print this help message.\n")
-    out.write("-v OR --version    Display version information.\n")
+    out = sys.stderr if error else sys.stdout
+    print("{} [OPTIONS] FILENAME\n".format(command), file=out)
+    print("-f                 "
+          'Specify conf filename other than ".editorconfig".\n', file=out)
+    print("-b                 "
+          "Specify version (used by devs to test compatibility).\n", file=out)
+    print("-h OR --help       Print this help message.\n", file=out)
+    print("-v OR --version    Display version information.\n", file=out)
 
 
 def main():
@@ -57,9 +56,9 @@ def main():
         if option == '-b':
             version_tuple = split_version(arg)
             if version_tuple is None:
-                sys.exit("Invalid version number: %s" % arg)
+                sys.exit("Invalid version number: {}".format(arg))
 
-    if len(args) < 1:
+    if not args:
         usage(command_name, error=True)
         sys.exit(2)
     filenames = args
@@ -73,9 +72,9 @@ def main():
             print(str(e))
             sys.exit(2)
         if multiple_files:
-            print("[%s]" % filename)
+            print("[{}]".format(filename))
         for key, value in options.items():
-            print("%s=%s" % (key, value))
+            print("{}={}".format(key, value))
 
 
 if __name__ == "__main__":

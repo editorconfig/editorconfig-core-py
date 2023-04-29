@@ -20,7 +20,6 @@ Changes to original fnmatch module:
 import os
 import re
 
-
 __all__ = ["fnmatch", "fnmatchcase", "translate"]
 
 _cache = {}
