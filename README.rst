@@ -59,10 +59,10 @@ Basic example use of EditorConfig Python Core as a library:
     try:
         options = get_properties(filename)
     except EditorConfigError:
-        print "Error occurred while getting EditorConfig properties"
+        print("Error occurred while getting EditorConfig properties")
     else:
         for key, value in options.items():
-            print "%s=%s" % (key, value)
+            print(f"{key}={value}")
 
 For details, please take a look at the `online documentation
 <http://pydocs.editorconfig.org>`_.
@@ -78,9 +78,9 @@ using the following commands::
     ctest .
 
 Use ``-DPYTHON_EXECUTABLE`` to run the tests using an alternative versions of
-Python (e.g. Python 3)::
+Python (e.g. Python 3.12)::
 
-    cmake -DPYTHON_EXECUTABLE=/usr/bin/python3 .
+    cmake -DPYTHON_EXECUTABLE=/usr/bin/python3.12 .
     ctest .
 
 License
