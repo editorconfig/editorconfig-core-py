@@ -11,30 +11,20 @@ on:
 jobs:
   test:
     name: Runtime
-    runs-on: ubuntu-24.04
-
-    strategy:
-      matrix:
-        python-version: ["3.12"]
+    runs-on: ubuntu-latest
+    container: python:3.13-bookworm
 
     steps:
       - uses: actions/checkout@v4
         with:
           submodules: recursive
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-          update-environment: true
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
 
       - name: Install CMake
-        run: sudo apt-get install -y cmake
-      - name: Start virtual environment
-        run: python -m venv _e
+        run: apt-get update && apt-get install -y cmake
       - name: Install Dependencies
-        run: source _e/bin/activate && pip install -e .
+        run: pip install -e .
 
       - name: Test
-        run: source _e/bin/activate && cmake . && ctest -VV .
+        run: cmake . && ctest -VV .
