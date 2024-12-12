@@ -12,19 +12,23 @@ jobs:
   test:
     name: Runtime
     runs-on: ubuntu-latest
-    container: python:3.13-bookworm
+    container: python:3.13-alpine3.21
 
     steps:
+      - name: Install Alpine Dependencies
+        run: apk add cmake git make
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
+      - name: Display CMake version
+        run: cmake --version
+      - name: Display Git version
+        run: git --version
+
       - uses: actions/checkout@v4
         with:
           submodules: recursive
-      - name: Display Python version
-        run: python -c "import sys; print(sys.version)"
 
-      - name: Install CMake
-        run: apt-get update && apt-get install -y cmake
       - name: Install Dependencies
         run: pip install -e .
-
       - name: Test
         run: cmake . && ctest -VV .
