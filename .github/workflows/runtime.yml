@@ -1,0 +1,30 @@
+# Runtime tests
+
+name: Runtime
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
+
+jobs:
+  test:
+    name: Runtime
+    runs-on: ubuntu-latest
+    container: python:3.13-bookworm
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
+
+      - name: Install CMake
+        run: apt-get update && apt-get install -y cmake
+      - name: Install Dependencies
+        run: pip install -e .
+
+      - name: Test
+        run: cmake . && ctest -VV .
