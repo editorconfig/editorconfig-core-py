@@ -1,3 +1,35 @@
 [build-system]
-requires = ["setuptools>=42.2"]
+requires = ["setuptools>=61.2"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "EditorConfig"
+authors = [{name = "EditorConfig Team"}]
+license = {text = "PSF-2.0"}
+description = "EditorConfig File Locator and Interpreter for Python"
+readme = "README.rst"
+classifiers = [
+    "License :: OSI Approved :: Python Software Foundation License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 2.7",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: Implementation :: PyPy",
+]
+dynamic = ["version"]
+
+[project.urls]
+Homepage = "https://editorconfig.org/"
+"Source Code" = "https://github.com/editorconfig/editorconfig-core-py"
+"Bug Tracker" = "https://github.com/editorconfig/editorconfig-core-py/issues"
+
+[project.scripts]
+editorconfig = "editorconfig.__main__:main"
+
+[tool.setuptools]
+packages = ["editorconfig"]
+include-package-data = false
