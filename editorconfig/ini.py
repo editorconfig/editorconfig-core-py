@@ -27,10 +27,6 @@ from editorconfig.fnmatch import fnmatch
 
 __all__ = ["ParsingError", "EditorConfigParser"]
 
-MAX_SECTION_LENGTH = 4096
-MAX_PROPERTY_LENGTH= 50
-MAX_VALUE_LENGTH = 255
-
 
 class EditorConfigParser(object):
 
@@ -138,8 +134,6 @@ class EditorConfigParser(object):
                 mo = self.SECTCRE.match(line)
                 if mo:
                     sectname = mo.group('header')
-                    if len(sectname) > MAX_SECTION_LENGTH:
-                        continue
                     in_section = True
                     matching_section = self.matches_filename(fpname, sectname)
                     # So sections can't start with a continuation line
@@ -160,9 +154,6 @@ class EditorConfigParser(object):
                         if optval == '""':
                             optval = ''
                         optname = self.optionxform(optname.rstrip())
-                        if (len(optname) > MAX_PROPERTY_LENGTH or
-                            len(optval) > MAX_VALUE_LENGTH):
-                            continue
                         if not in_section and optname == 'root':
                             self.root_file = (optval.lower() == 'true')
                         if matching_section:
