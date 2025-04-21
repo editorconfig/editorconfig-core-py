@@ -11,7 +11,7 @@ The EditorConfig Python Core is a Python package for locating and parsing
 EditorConfig files.  This package can be used as an import by other Python code
 or as a stand-alone command line program.
 
-.. _`EditorConfig Homepage`: http://editorconfig.org
+.. _`EditorConfig Homepage`: https://editorconfig.org
 
 Contents:
 
