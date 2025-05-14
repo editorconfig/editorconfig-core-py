@@ -8,7 +8,6 @@ import getopt
 import sys
 
 from editorconfig import VERSION, __version__
-from editorconfig.compat import force_unicode
 from editorconfig.exceptions import ParsingError, PathError, VersionError
 from editorconfig.handler import EditorConfigHandler
 from editorconfig.versiontools import split_version
@@ -35,7 +34,7 @@ def usage(command, error=False):
 def main():
     command_name = sys.argv[0]
     try:
-        opts, args = getopt.getopt(list(map(force_unicode, sys.argv[1:])),
+        opts, args = getopt.getopt(sys.argv[1:],
                                    "vhb:f:", ["version", "help"])
     except getopt.GetoptError as e:
         print(str(e))

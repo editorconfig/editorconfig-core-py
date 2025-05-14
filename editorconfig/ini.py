@@ -20,7 +20,6 @@ from collections import OrderedDict
 from os import sep
 from os.path import dirname, normpath
 
-from editorconfig.compat import u
 from editorconfig.exceptions import ParsingError
 from editorconfig.fnmatch import fnmatch
 
@@ -122,7 +121,7 @@ class EditorConfigParser(object):
             line = fp.readline()
             if not line:
                 break
-            if lineno == 0 and line.startswith(u('\ufeff')):
+            if lineno == 0 and line.startswith('\ufeff'):
                 line = line[1:]  # Strip UTF-8 BOM
             lineno = lineno + 1
             # comment or blank line?
