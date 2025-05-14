@@ -9,9 +9,9 @@ Licensed under Simplified BSD License (see LICENSE.BSD file).
 
 import os
 
-from editorconfig import VERSION
 from editorconfig.exceptions import PathError, VersionError
 from editorconfig.ini import EditorConfigParser
+from editorconfig.version import VERSION
 
 
 __all__ = ['EditorConfigHandler']

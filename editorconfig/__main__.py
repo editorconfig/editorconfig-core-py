@@ -7,9 +7,10 @@ Licensed under Simplified BSD License (see LICENSE.BSD file).
 import getopt
 import sys
 
-from editorconfig import VERSION, __version__
+from editorconfig import __version__
 from editorconfig.exceptions import ParsingError, PathError, VersionError
 from editorconfig.handler import EditorConfigHandler
+from editorconfig.version import VERSION
 from editorconfig.versiontools import split_version
 
 
