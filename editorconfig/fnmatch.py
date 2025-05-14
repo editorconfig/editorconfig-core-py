@@ -180,7 +180,7 @@ def translate(pat, nested=False):
             if not has_comma and pos < length:
                 num_range = NUMERIC_RANGE.match(pat[index:pos])
                 if num_range:
-                    numeric_groups.append(map(int, num_range.groups()))
+                    numeric_groups.append((int(num_range.group(1)), int(num_range.group(2))))
                     result += r"([+-]?\d+)"
                 else:
                     inner_result, inner_groups = translate(pat[index:pos],

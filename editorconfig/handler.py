@@ -46,7 +46,7 @@ class EditorConfigHandler(object):
         self.filepath = filepath
         self.conf_filename = conf_filename
         self.version = version
-        self.options = None
+        self.options = dict()
 
     def get_configurations(self):
 
@@ -73,8 +73,7 @@ class EditorConfigHandler(object):
             # Merge new EditorConfig file's options into current options
             old_options = self.options
             self.options = parser.options
-            if old_options:
-                self.options.update(old_options)
+            self.options.update(old_options)
 
             # Stop parsing if parsed file has a ``root = true`` option
             if parser.root_file:

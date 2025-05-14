@@ -55,9 +55,10 @@ def main():
         if option == '-f':
             conf_filename = arg
         if option == '-b':
-            version_tuple = split_version(arg)
-            if version_tuple is None:
+            arg_tuple = split_version(arg)
+            if arg_tuple is None:
                 sys.exit("Invalid version number: %s" % arg)
+            version_tuple = arg_tuple
 
     if len(args) < 1:
         usage(command_name, error=True)
