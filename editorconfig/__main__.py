@@ -14,11 +14,11 @@ from editorconfig.version import VERSION
 from editorconfig.versiontools import split_version
 
 
-def version():
+def version() -> None:
     print("EditorConfig Python Core Version %s" % __version__)
 
 
-def usage(command, error=False):
+def usage(command: str, error: bool = False) -> None:
     if error:
         out = sys.stderr
     else:
@@ -32,7 +32,7 @@ def usage(command, error=False):
     out.write("-v OR --version    Display version information.\n")
 
 
-def main():
+def main() -> None:
     command_name = sys.argv[0]
     try:
         opts, args = getopt.getopt(sys.argv[1:],

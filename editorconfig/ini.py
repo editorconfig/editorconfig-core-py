@@ -15,7 +15,7 @@ Changes to original ConfigParser:
 
 import posixpath
 import re
-from codecs import open
+from codecs import open, StreamReaderWriter
 from collections import OrderedDict
 from os import sep
 from os.path import dirname, normpath
@@ -75,12 +75,12 @@ class EditorConfigParser(object):
         """, re.VERBOSE
     )
 
-    def __init__(self, filename):
-        self.filename = filename
-        self.options = OrderedDict()
-        self.root_file = False
+    def __init__(self, filename: str):
+        self.filename: str = filename
+        self.options: OrderedDict[str, str] = OrderedDict()
+        self.root_file: bool = False
 
-    def matches_filename(self, config_filename, glob):
+    def matches_filename(self, config_filename: str, glob: str) -> bool:
         """Return True if section glob matches filename"""
         config_dirname = normpath(dirname(config_filename)).replace(sep, '/')
         glob = glob.replace("\\#", "#")
@@ -93,7 +93,7 @@ class EditorConfigParser(object):
             glob = posixpath.join('**/', glob)
         return fnmatch(self.filename, glob)
 
-    def read(self, filename):
+    def read(self, filename: str) -> None:
         """Read and parse single EditorConfig file"""
         try:
             fp = open(filename, encoding='utf-8')
@@ -102,7 +102,7 @@ class EditorConfigParser(object):
         self._read(fp, filename)
         fp.close()
 
-    def _read(self, fp, fpname):
+    def _read(self, fp: StreamReaderWriter, fpname: str) -> None:
         """Parse a sectioned setup file.
 
         The sections in setup file contains a title line at the top,
@@ -169,5 +169,5 @@ class EditorConfigParser(object):
         if e:
             raise e
 
-    def optionxform(self, optionstr):
+    def optionxform(self, optionstr: str) -> str:
         return optionstr.lower()
