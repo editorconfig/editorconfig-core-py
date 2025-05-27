@@ -30,6 +30,11 @@ Homepage = "https://editorconfig.org/"
 [project.scripts]
 editorconfig = "editorconfig.__main__:main"
 
+[project.optional-dependencies]
+dev = [
+    "mypy>=1.15",
+]
+
 [tool.setuptools]
 packages = ["editorconfig"]
 include-package-data = false
