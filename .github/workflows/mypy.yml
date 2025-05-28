@@ -1,0 +1,32 @@
+# Static type checking
+
+name: Static type checking
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
+
+jobs:
+  test:
+    name: Static type checking
+    runs-on: ubuntu-latest
+    container: python:3.13-alpine3.21
+
+    steps:
+      - name: Install Alpine Dependencies
+        run: apk add git
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
+      - name: Display Git version
+        run: git --version
+
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install Dependencies
+        run: pip install -e ".[dev]"
+      - name: Run mypy
+        run: mypy --strict editorconfig
