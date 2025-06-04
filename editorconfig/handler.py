@@ -8,16 +8,18 @@ Licensed under Simplified BSD License (see LICENSE.BSD file).
 """
 
 import os
+from collections import OrderedDict
 
-from editorconfig import VERSION
 from editorconfig.exceptions import PathError, VersionError
 from editorconfig.ini import EditorConfigParser
+from editorconfig.version import VERSION
+from editorconfig.versiontools import VersionTuple
 
 
 __all__ = ['EditorConfigHandler']
 
 
-def get_filenames(path, filename):
+def get_filenames(path: str, filename: str) -> list[str]:
     """Yield full filepath for filename in each directory in and above path"""
     path_list = []
     while True:
@@ -40,15 +42,15 @@ class EditorConfigHandler(object):
 
     """
 
-    def __init__(self, filepath, conf_filename='.editorconfig',
-                 version=VERSION):
+    def __init__(self, filepath: str, conf_filename: str = '.editorconfig',
+                 version: VersionTuple = VERSION):
         """Create EditorConfigHandler for matching given filepath"""
-        self.filepath = filepath
-        self.conf_filename = conf_filename
-        self.version = version
-        self.options = None
+        self.filepath: str = filepath
+        self.conf_filename: str = conf_filename
+        self.version: VersionTuple = version
+        self.options: OrderedDict[str, str] = OrderedDict()
 
-    def get_configurations(self):
+    def get_configurations(self) -> OrderedDict[str, str]:
 
         """
         Find EditorConfig files and return all options matching filepath
@@ -73,8 +75,7 @@ class EditorConfigHandler(object):
             # Merge new EditorConfig file's options into current options
             old_options = self.options
             self.options = parser.options
-            if old_options:
-                self.options.update(old_options)
+            self.options.update(old_options)
 
             # Stop parsing if parsed file has a ``root = true`` option
             if parser.root_file:
@@ -83,7 +84,7 @@ class EditorConfigHandler(object):
         self.preprocess_values()
         return self.options
 
-    def check_assertions(self):
+    def check_assertions(self) -> None:
 
         """Raise error if filepath or version have invalid values"""
 
@@ -96,7 +97,7 @@ class EditorConfigHandler(object):
             raise VersionError(
                 "Required version is greater than the current version.")
 
-    def preprocess_values(self):
+    def preprocess_values(self) -> None:
 
         """Preprocess option values for consumption by plugins"""
 
