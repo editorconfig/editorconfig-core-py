@@ -19,6 +19,7 @@ Changes to original fnmatch module:
 
 import os
 import re
+from re import Pattern
 
 
 __all__ = ["fnmatch", "fnmatchcase", "translate"]
@@ -62,7 +63,7 @@ NUMERIC_RANGE = re.compile(
 )
 
 
-def fnmatch(name, pat):
+def fnmatch(name: str, pat: str) -> bool:
     """Test whether FILENAME matches PATTERN.
 
     Patterns are Unix shell style:
@@ -84,7 +85,7 @@ def fnmatch(name, pat):
     return fnmatchcase(name, pat)
 
 
-def cached_translate(pat):
+def cached_translate(pat: str) -> tuple[Pattern[str], list[tuple[int, int]]]:
     if not pat in _cache:
         res, num_groups = translate(pat)
         regex = re.compile(res)
@@ -92,7 +93,7 @@ def cached_translate(pat):
     return _cache[pat]
 
 
-def fnmatchcase(name, pat):
+def fnmatchcase(name: str, pat: str) -> bool:
     """Test whether FILENAME matches PATTERN, including case.
 
     This is a version of fnmatch() which doesn't case-normalize
@@ -111,7 +112,7 @@ def fnmatchcase(name, pat):
     return pattern_matched
 
 
-def translate(pat, nested=False):
+def translate(pat: str, nested: bool = False) -> tuple[str, list[tuple[int, int]]]:
     """Translate a shell PATTERN to a regular expression.
 
     There is no way to quote meta-characters.
@@ -180,7 +181,7 @@ def translate(pat, nested=False):
             if not has_comma and pos < length:
                 num_range = NUMERIC_RANGE.match(pat[index:pos])
                 if num_range:
-                    numeric_groups.append(map(int, num_range.groups()))
+                    numeric_groups.append((int(num_range.group(1)), int(num_range.group(2))))
                     result += r"([+-]?\d+)"
                 else:
                     inner_result, inner_groups = translate(pat[index:pos],

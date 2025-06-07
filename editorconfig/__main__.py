@@ -7,18 +7,18 @@ Licensed under Simplified BSD License (see LICENSE.BSD file).
 import getopt
 import sys
 
-from editorconfig import VERSION, __version__
-from editorconfig.compat import force_unicode
+from editorconfig import __version__
 from editorconfig.exceptions import ParsingError, PathError, VersionError
 from editorconfig.handler import EditorConfigHandler
+from editorconfig.version import VERSION
 from editorconfig.versiontools import split_version
 
 
-def version():
+def version() -> None:
     print("EditorConfig Python Core Version %s" % __version__)
 
 
-def usage(command, error=False):
+def usage(command: str, error: bool = False) -> None:
     if error:
         out = sys.stderr
     else:
@@ -32,10 +32,10 @@ def usage(command, error=False):
     out.write("-v OR --version    Display version information.\n")
 
 
-def main():
+def main() -> None:
     command_name = sys.argv[0]
     try:
-        opts, args = getopt.getopt(list(map(force_unicode, sys.argv[1:])),
+        opts, args = getopt.getopt(sys.argv[1:],
                                    "vhb:f:", ["version", "help"])
     except getopt.GetoptError as e:
         print(str(e))
@@ -55,9 +55,10 @@ def main():
         if option == '-f':
             conf_filename = arg
         if option == '-b':
-            version_tuple = split_version(arg)
-            if version_tuple is None:
+            arg_tuple = split_version(arg)
+            if arg_tuple is None:
                 sys.exit("Invalid version number: %s" % arg)
+            version_tuple = arg_tuple
 
     if len(args) < 1:
         usage(command_name, error=True)
