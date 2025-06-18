@@ -8,7 +8,7 @@ authors = [{name = "EditorConfig Team"}]
 license = {text = "PSF-2.0"}
 description = "EditorConfig File Locator and Interpreter for Python"
 readme = "README.rst"
-requires-python = ">=3.13.4"
+requires-python = ">=3.13.5"
 classifiers = [
     "License :: OSI Approved :: Python Software Foundation License",
     "Operating System :: OS Independent",
@@ -32,7 +32,7 @@ editorconfig = "editorconfig.__main__:main"
 
 [project.optional-dependencies]
 dev = [
-    "mypy>=1.16.0",
+    "mypy>=1.16.1",
 ]
 
 [tool.setuptools]
