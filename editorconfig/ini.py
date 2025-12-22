@@ -15,8 +15,8 @@ Changes to original ConfigParser:
 
 import posixpath
 import re
-from codecs import open, StreamReaderWriter
 from collections import OrderedDict
+from io import TextIOBase
 from os import sep
 from os.path import dirname, normpath
 
@@ -96,13 +96,12 @@ class EditorConfigParser(object):
     def read(self, filename: str) -> None:
         """Read and parse single EditorConfig file"""
         try:
-            fp = open(filename, encoding='utf-8')
-        except IOError:
+            with open(filename, encoding='utf-8', mode='r') as fp:
+                self._read(fp, filename)
+        except (OSError, FileNotFoundError):
             return
-        self._read(fp, filename)
-        fp.close()
 
-    def _read(self, fp: StreamReaderWriter, fpname: str) -> None:
+    def _read(self, fp: TextIOBase, fpname: str) -> None:
         """Parse a sectioned setup file.
 
         The sections in setup file contains a title line at the top,
