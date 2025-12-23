@@ -98,7 +98,7 @@ class EditorConfigParser(object):
         try:
             with open(filename, encoding='utf-8', mode='r') as fp:
                 self._read(fp, filename)
-        except (OSError, FileNotFoundError):
+        except OSError:
             return
 
     def _read(self, fp: TextIOBase, fpname: str) -> None:
