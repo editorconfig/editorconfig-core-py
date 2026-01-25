@@ -96,7 +96,7 @@ class EditorConfigParser(object):
     def read(self, filename: str) -> None:
         """Read and parse single EditorConfig file"""
         try:
-            with open(filename, encoding='utf-8', mode='r') as fp:
+            with open(filename, mode='r') as fp:
                 self._read(fp, filename)
         except OSError:
             return
