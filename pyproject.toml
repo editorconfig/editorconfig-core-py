@@ -33,7 +33,7 @@ editorconfig = "editorconfig.__main__:main"
 
 [project.optional-dependencies]
 dev = [
-    "mypy>=1.20.2",
+    "mypy>=2.1.0",
 ]
 
 [tool.setuptools]

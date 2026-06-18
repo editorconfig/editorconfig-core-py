@@ -24,7 +24,7 @@ from re import Pattern
 
 __all__ = ["fnmatch", "fnmatchcase", "translate"]
 
-_cache = {}
+_cache: dict[str, tuple[Pattern[str], list[tuple[int, int]]]] = {}
 
 LEFT_BRACE = re.compile(
     r"""
