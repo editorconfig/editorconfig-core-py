@@ -8,14 +8,14 @@ cmake_minimum_required(VERSION 3.16.3)
 # Do not check any compiler
 project(editorconfig-core-py NONE)
 
-find_package(PythonInterp)
+find_package(Python3 COMPONENTS Interpreter)
 
-if(NOT PYTHONINTERP_FOUND)
+if(NOT Python3_Interpreter_FOUND)
     message(FATAL_ERROR
         "Python interpreter is not found. If you have python installed, please run:
-        cmake -DPYTHON_EXECUTABLE=/path/to/python .")
+        cmake -DPython3_EXECUTABLE=/path/to/python .")
 endif()
 
 enable_testing()
-set(EDITORCONFIG_CMD ${PYTHON_EXECUTABLE} -m editorconfig)
+set(EDITORCONFIG_CMD ${Python3_EXECUTABLE} -m editorconfig)
 add_subdirectory(tests)
