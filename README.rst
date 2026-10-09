@@ -77,7 +77,7 @@ using the following commands::
     cmake .
     ctest .
 
-Use ``-DPython3_EXECUTABLE`` to run the tests using an alternative versions of
+Use ``-DPython3_EXECUTABLE`` to run the tests using an alternative version of
 Python (e.g. Python 3.12)::
 
     cmake -DPython3_EXECUTABLE=/usr/bin/python3.12 .
