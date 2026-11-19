@@ -19,3 +19,7 @@ endif()
 enable_testing()
 set(EDITORCONFIG_CMD ${Python3_EXECUTABLE} -m editorconfig)
 add_subdirectory(tests)
+
+add_test(NAME unit_tests
+    COMMAND ${Python3_EXECUTABLE} -m unittest discover -v
+        -s ${CMAKE_CURRENT_SOURCE_DIR}/unit_tests)

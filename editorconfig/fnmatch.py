@@ -129,7 +129,10 @@ def translate(pat: str, nested: bool = False) -> tuple[str, list[tuple[int, int]
     while index < length:
         current_char = pat[index]
         index += 1
-        if current_char == '*':
+        if in_brackets and current_char not in '\\]-':
+            # Glob characters have no special meaning inside brackets
+            result += re.escape(current_char)
+        elif current_char == '*':
             pos = index
             if pos < length and pat[pos] == '*':
                 result += '.*'
@@ -142,15 +145,28 @@ def translate(pat: str, nested: bool = False) -> tuple[str, list[tuple[int, int]
                 result += '\\['
             else:
                 pos = index
+                # A ']' right after '[' or '[!' is part of the set
+                if pos < length and pat[pos] in '!^':
+                    pos += 1
+                if pos < length and pat[pos] == ']':
+                    pos += 1
                 has_slash = False
                 while pos < length and pat[pos] != ']':
-                    if pat[pos] == '/' and pat[pos-1] != '\\':
+                    if pat[pos] == '\\':
+                        pos += 2
+                        continue
+                    if pat[pos] == '/':
                         has_slash = True
                         break
                     pos += 1
                 if has_slash:
-                    result += '\\[' + pat[index:(pos + 1)]
+                    # Brackets can't hold a '/', so match the text literally
+                    literal = re.sub(r'\\(.)', r'\1', pat[index:(pos + 1)])
+                    result += '\\[' + re.escape(literal)
                     index = pos + 1
+                elif pos >= length:
+                    # No closing ']', so the '[' is a literal character
+                    result += '\\['
                 else:
                     if index < length and pat[index] in '!^':
                         index += 1
@@ -159,12 +175,12 @@ def translate(pat: str, nested: bool = False) -> tuple[str, list[tuple[int, int]
                         result += '['
                     in_brackets = True
         elif current_char == '-':
-            if in_brackets:
+            if in_brackets and not is_escaped:
                 result += current_char
             else:
                 result += '\\' + current_char
         elif current_char == ']':
-            if in_brackets and pat[index-2] == '\\':
+            if in_brackets and is_escaped:
                 result += '\\]'
             else:
                 result += current_char
